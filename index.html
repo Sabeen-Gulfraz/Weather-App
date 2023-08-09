@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather App</title>
+    <link rel="icon" href="img/logo.png">
+</head>
+
+<body>
+    <!-- background of page -->
+    <img id="img-bg" src="img/mybg.webp" alt="background">
+    <!-- logo and name -->
+    <div id="app-logo-name">
+        <img class="app-logo" src="img/logo.png" alt="logo">
+        <h2 class="app-name">Weather App</h2>
+    </div>
+    <!-- Weather Track input -->
+    <div id="input">
+        <label class="label" for="location">Track Weather here</label>
+        <select class="loc-input" id="location" type="text">
+            <option selected>Choose Location</option>
+        </select>
+    </div>
+    <!-- current Weather page  -->
+    <section id="bg">
+    </section>
+    <!-- footer -->
+    <footer id="foot">
+        <p class="foot-para">&copy; 2023 Developed by Sabeen Gulfraz</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.1.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
