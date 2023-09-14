@@ -274,7 +274,7 @@ html {
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 510px) {
   #Weather-card {
-    width: 380px;
+    width: 330px;
     height: 320px;
   }
   #temp-cent .temp {
