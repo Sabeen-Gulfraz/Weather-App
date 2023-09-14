@@ -6,32 +6,68 @@ $(document).on("click", function (event) {
     $("#location").val("Choose Location");
   }
 });
-//cities names API
-$.ajax({
-  url: 'https://countriesnow.space/api/v0.1/countries/population/cities',
-  success: function (data) {
-    var citiesData = data.data;
-    citiesData.forEach(function (cityData) {
-      var cityName = cityData.city;
-      $('#location').append(`
-        <option value="${cityName}">${cityName}</option>
-      `);
+//countries API
+$(document).ready(function() {
+  $.ajax({
+    url: 'https://countriesnow.space/api/v0.1/countries',
+    success: function(data) {
+      var countryNames = data.data;
+      var countryName;
+      countryNames.forEach(function(countryData) {
+        countryName = countryData.country;
+        $('#location').append(`
+          <option class="country-option" value="${countryName}">${countryName}</option>
+        `);
+      });
+    }
+  });
+//Add Event for Cities list 
+  $("#location").on('change', function() {
+    var selectedCountry = $(this).val();
+    $.ajax({
+      url: "https://countriesnow.space/api/v0.1/countries/cities",
+      type: "POST",
+      data: {
+        "country": selectedCountry
+      },
+      beforeSend: function(){
+        $("#input").append(`
+          <img  class="load" width="104px" height="104px" src="img/loading.gif" alt="">
+        `);
+      },
+      success: function(data) {
+        var cities = data.data;
+        $("#input").html(`
+          <label class="label">Now Choose Your City</label>
+          <select class="loc-input" id="city" type="text">
+              <option>Choose City</option>
+          </select>
+        `);
+        cities.forEach(function(city) {
+          $("#city").append(`
+            <option value="${city}">${city}</option>
+          `);
+        });
+      }
     });
-  }
+  });
 });
 // weather API
 var latitude;
 var longitude;
 var input_location;
-// Event listener for the select element
-$("#location").on("change", function () {
+// Event listener for cities select element
+$(document).on("change", "#city", function() {
   $("#bg").html(" ");
   input_location = $(this).val();
   //now select element value stored in input_location variable
-  $("#location").val(input_location);
+  $("#city").val(input_location);
   //API to change city name into longitude and altitude form
   $.ajax({
     url: `https://geocode.maps.co/search?q=${input_location}`,
+    beforeSend: function () {
+      $("#input").append(`<img  class="load" width="104px" height="104px" src="img/loading.gif" alt="">`);
+    },
     success: function (data) {
       //input location changed in longitude and latitude
       latitude = data[0].lat;
@@ -39,9 +75,6 @@ $("#location").on("change", function () {
       //get weather for the location
       $.ajax({
         url: `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=auto`,
-        beforeSend: function () {
-          $("#input").append(`<img  class="load" width="104px" height="104px" src="img/loading.gif" alt="">`);
-        },
         success: function (data) {
           $(".load").remove();
           var bgclass;
@@ -84,6 +117,16 @@ $("#location").on("change", function () {
               <div id="temp-cent">
                  <h1 class="temp">${data.current_weather.temperature}</h1>
                  <img class="cent"  src="img/centigrate.gif" alt="centigrate">
+              </div>
+              <div id="direction-speed">
+                  <div class="w-direction">
+                     <span><b>Wind Direction</b></span>
+                     <span>${data.current_weather.winddirection} degree</span>
+                  </div>
+                  <div class="w-speed">
+                     <span><b>Wind Speed</b></span>
+                     <span>${data.current_weather.windspeed} (Km/h)</span>
+                  </div>
               </div>
             </div>
           `);
