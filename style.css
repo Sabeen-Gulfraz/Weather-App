@@ -58,6 +58,7 @@ html {
   width: 400px;
   height: 40px;
   border: none;
+  outline: none;
   border-radius: 30px;
   box-shadow: 0px 0px 80px #f5f3f3;
 }
@@ -80,21 +81,22 @@ html {
 
 /* weather data card */
 #bg {
-  position: absolute;
-  bottom: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 }
-
 #Weather-card {
   width: 650px;
   height: 500px;
   box-shadow: 0px 0px 80px #000000;
   border-radius: 60px;
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20%;
+  justify-content: space-evenly;
 }
 
 .clear-sky {
@@ -128,7 +130,27 @@ html {
 .storm {
   background-image: url(img/storm.webp);
 }
-
+#direction-speed .w-direction{
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 40px;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#direction-speed .w-speed{
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 40px;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#direction-speed{
+  display: flex;
+}
 #current-date {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
@@ -168,11 +190,14 @@ html {
   font-size: 7.9em;
   font-family: Arial, Helvetica, sans-serif;
 }
-#temp-cent .cent{
-  width :110px;
-   height: 110px;
+
+#temp-cent .cent {
+  width: 110px;
+  height: 110px;
 }
+
 #temp-cent {
+  height: 150px;
   display: flex;
   gap: 10px;
   align-items: center;
@@ -195,6 +220,7 @@ html {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9em;
 }
+
 /* media queries */
 
 /* Tablet Portrait size to standard 1000 (devices and browsers) */
@@ -203,67 +229,86 @@ html {
     width: 600px;
     height: 450px;
   }
-  #bg {
-    bottom: 50px;
-  }
   #temp-cent .temp {
     font-size: 6.9em;
   }
 }
+
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 @media only screen and (min-width: 620px) and (max-width: 767px) {
   #Weather-card {
     width: 550px;
     height: 400px;
   }
-  #bg {
-    bottom: 60px;
-  }
   #temp-cent .temp {
     font-size: 5.9em;
   }
-  #temp-cent .cent{
-    width :100px;
-     height: 100px;
+
+  #temp-cent .cent {
+    width: 100px;
+    height: 100px;
   }
 }
+
 @media only screen and (min-width: 511px) and (max-width: 619px) {
   #Weather-card {
     width: 500px;
     height: 380px;
   }
-  #bg {
-    bottom: 60px;
-  }
   #temp-cent .temp {
-    font-size: 5.9em;
+    font-size: 5.5em;
   }
-  #temp-cent .cent{
-    width :100px;
-     height: 100px;
+  #Weather-card .cross {
+    width: 20px;
+    height: 20px;
+  }
+  #temp-cent {
+    height: 110px;
+  }
+  #temp-cent .cent {
+    width: 93px;
+    height: 93px;
   }
 }
+
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 510px) {
   #Weather-card {
     width: 380px;
     height: 320px;
   }
-  #bg {
-    bottom: 100px;
-  }
   #temp-cent .temp {
     font-size: 4.0em;
   }
-  #temp-cent .cent{
-    width :60px;
-     height: 60px;
+  #Weather-card .Weather {
+    font-size: 1.5em;
+  }
+  #Weather-card .city {
+    padding: 40px 0 0 40px;
+  }
+  #Weather-card .cross {
+    width: 15px;
+    height: 15px;
+  }
+
+  #temp-cent .cent {
+    width: 60px;
+    height: 60px;
+  }
+  #direction-speed .w-direction{
+    font-size: 0.8em;
+  }
+  #direction-speed .w-speed{
+    font-size: 0.8em;
+  }
+  #temp-cent {
+    height: 100px;
   }
   #input .label {
     font-size: 20px;
     width: 300px;
   }
-  
+
   #input .loc-input {
     width: 330px;
     height: 40px;
